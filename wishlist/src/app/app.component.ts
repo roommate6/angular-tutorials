@@ -19,9 +19,27 @@ export class AppComponent {
     new Wish('Drink coffe.', WishState.Completed),
     new Wish('Find grass that cuts itself.', WishState.Uncompleted),
   ];
-  wishesWithFilterApplied: Wish[] = this.wishes;
   newWishContent: string = '';
   wishFilter: string = 'all';
+
+  get wishesWithFilterApplied(): Wish[] {
+    let wishFilter = this.wishFilter;
+
+    if (wishFilter === 'all') {
+      return this.wishes;
+    }
+    if (wishFilter === 'completed') {
+      return this.wishes.filter((wish) => {
+        return wish.state === WishState.Completed;
+      });
+    }
+    if (wishFilter === 'uncompleted') {
+      return this.wishes.filter((wish) => {
+        return wish.state === WishState.Uncompleted;
+      });
+    }
+    return [];
+  }
 
   addNewWish(): void {
     this.wishes.push(new Wish(this.newWishContent, WishState.Uncompleted));
@@ -38,24 +56,5 @@ export class AppComponent {
       return;
     }
     wish.state = WishState.Uncompleted;
-  }
-
-  handleTheChangeOfTheWishFilter(event: any) {
-    if (event === 'all') {
-      this.wishesWithFilterApplied = this.wishes;
-      return;
-    }
-    if (event === 'completed') {
-      this.wishesWithFilterApplied = this.wishes.filter((wish) => {
-        return wish.state === WishState.Completed;
-      });
-      return;
-    }
-    if (event === 'uncompleted') {
-      this.wishesWithFilterApplied = this.wishes.filter((wish) => {
-        return wish.state === WishState.Uncompleted;
-      });
-      return;
-    }
   }
 }

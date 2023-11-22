@@ -22,11 +22,7 @@
 
   <div class="row mt-3">
     <div class="col-sm-2">
-      <select
-        class="form-select"
-        [(ngModel)]="wishFilter"
-        (ngModelChange)="handleTheChangeOfTheWishFilter($event)"
-      >
+      <select class="form-select" [(ngModel)]="wishFilter">
         <option value="all">All</option>
         <option value="completed">Completed</option>
         <option value="uncompleted">Uncompleted</option>
