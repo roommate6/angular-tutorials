@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Wish, WishState } from '../shared/models/Wish';
 import { FormsModule } from '@angular/forms';
+import { WishesDisplayerComponent } from './wishes-displayer/wishes-displayer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [CommonModule, RouterOutlet, FormsModule, WishesDisplayerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -44,17 +45,5 @@ export class AppComponent {
   addNewWish(): void {
     this.wishes.push(new Wish(this.newWishContent, WishState.Uncompleted));
     this.newWishContent = '';
-  }
-
-  verifyThatWishIsCompleted(wish: Wish): boolean {
-    return wish.state === WishState.Completed;
-  }
-
-  toggledWishCheckbox(wish: Wish): void {
-    if (wish.state == WishState.Uncompleted) {
-      wish.state = WishState.Completed;
-      return;
-    }
-    wish.state = WishState.Uncompleted;
   }
 }
