@@ -1,0 +1,11 @@
+<div class="col-sm-2">
+  <select
+    class="form-select"
+    [(ngModel)]="selectedWishFilterIndex"
+    (ngModelChange)="handleOnSelectedWishFilterIndexChange($event)"
+  >
+    <option *ngFor="let wishFilter of wishFilters; index as i" [value]="i">
+      {{ wishFilter.name }}
+    </option>
+  </select>
+</div>
