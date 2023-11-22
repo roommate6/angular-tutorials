@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { Wish, WishState } from '../shared/models/Wish';
 import { FormsModule } from '@angular/forms';
 import { WishesDisplayerComponent } from './wishes-displayer/wishes-displayer.component';
+import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule, WishesDisplayerComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    WishesDisplayerComponent,
+    AddWishFormComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -20,7 +25,6 @@ export class AppComponent {
     new Wish('Drink coffe.', WishState.Completed),
     new Wish('Find grass that cuts itself.', WishState.Uncompleted),
   ];
-  newWishContent: string = '';
   wishFilter: string = 'all';
 
   get wishesWithFilterApplied(): Wish[] {
@@ -42,8 +46,7 @@ export class AppComponent {
     return [];
   }
 
-  addNewWish(): void {
-    this.wishes.push(new Wish(this.newWishContent, WishState.Uncompleted));
-    this.newWishContent = '';
+  handleOnNewWishCreateEvent(wish: Wish) {
+    this.wishes.push(wish);
   }
 }
