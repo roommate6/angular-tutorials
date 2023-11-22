@@ -12,21 +12,23 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  title: string = 'wishlist';
   wishes: Wish[] = [
-    // new Wish('I want to learn Angular.', WishState.Uncompleted),
-    // new Wish('I want to help my family.', WishState.Uncompleted),
-    // new Wish('Drink coffe.', WishState.Completed),
-    // new Wish('Find grass that cuts itself.', WishState.Uncompleted),
+    new Wish('I want to learn Angular.', WishState.Uncompleted),
+    new Wish('I want to help my family.', WishState.Uncompleted),
+    new Wish('Drink coffe.', WishState.Completed),
+    new Wish('Find grass that cuts itself.', WishState.Uncompleted),
   ];
+  wishesWithFilterApplied: Wish[] = this.wishes;
   newWishContent: string = '';
-  title = 'wishlist';
+  wishFilter: string = 'all';
 
   addNewWish(): void {
     this.wishes.push(new Wish(this.newWishContent, WishState.Uncompleted));
     this.newWishContent = '';
   }
 
-  wishIsCompleted(wish: Wish): boolean {
+  verifyThatWishIsCompleted(wish: Wish): boolean {
     return wish.state === WishState.Completed;
   }
 
@@ -36,5 +38,24 @@ export class AppComponent {
       return;
     }
     wish.state = WishState.Uncompleted;
+  }
+
+  handleTheChangeOfTheWishFilter(event: any) {
+    if (event === 'all') {
+      this.wishesWithFilterApplied = this.wishes;
+      return;
+    }
+    if (event === 'completed') {
+      this.wishesWithFilterApplied = this.wishes.filter((wish) => {
+        return wish.state === WishState.Completed;
+      });
+      return;
+    }
+    if (event === 'uncompleted') {
+      this.wishesWithFilterApplied = this.wishes.filter((wish) => {
+        return wish.state === WishState.Uncompleted;
+      });
+      return;
+    }
   }
 }

@@ -20,8 +20,28 @@
     </div>
   </form>
 
+  <div class="row mt-3">
+    <div class="col-sm-2">
+      <select
+        class="form-select"
+        [(ngModel)]="wishFilter"
+        (ngModelChange)="handleTheChangeOfTheWishFilter($event)"
+      >
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="uncompleted">Uncompleted</option>
+      </select>
+    </div>
+  </div>
+
   <div class="column mt-3">
-    <div *ngIf="wishes.length === 0; then noWishesMessage; else wishList"></div>
+    <div
+      *ngIf="
+        wishesWithFilterApplied.length === 0;
+        then noWishesMessage;
+        else wishList
+      "
+    ></div>
 
     <ng-template #noWishesMessage>
       There are no wishes to display.
@@ -29,13 +49,13 @@
 
     <ng-template #wishList>
       <ul class="wish-list">
-        <li *ngFor="let wish of wishes; index as i">
+        <li *ngFor="let wish of wishesWithFilterApplied; index as i">
           <div class="form-check">
             <label class="form-check-label">
               <input
                 class="checkbox"
                 type="checkbox"
-                [checked]="wishIsCompleted(wish)"
+                [checked]="verifyThatWishIsCompleted(wish)"
                 [attr.data-index]="i"
                 (click)="toggledWishCheckbox(wish)"
               />
