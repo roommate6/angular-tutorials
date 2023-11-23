@@ -4,9 +4,7 @@
   ></add-wish-form>
 
   <div class="row mt-3">
-    <wish-filter
-      (onWishFilterChange)="handleOnWishFilterChangeEvent($event)"
-    ></wish-filter>
+    <wish-filter [(wishFilterCallback)]="wishFilterCallback"></wish-filter>
   </div>
 
   <div class="column mt-3">

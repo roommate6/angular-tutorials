@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -17,7 +17,9 @@ import {
   styleUrl: './wish-filter.component.css',
 })
 export class WishFilterComponent implements OnInit {
-  @Output() onWishFilterChange = new EventEmitter<WishFilterCallback>();
+  @Input() wishFilterCallback!: WishFilterCallback;
+  @Output() wishFilterCallbackChange: EventEmitter<WishFilterCallback> =
+    new EventEmitter<WishFilterCallback>();
 
   readonly wishFilters: WishFilter[] = [
     new WishFilter('All', (_wish: Wish) => {
@@ -33,14 +35,13 @@ export class WishFilterComponent implements OnInit {
   selectedWishFilterIndex: string = '0';
 
   ngOnInit(): void {
-    this.onWishFilterChange.emit(
-      this.wishFilters[Number.parseInt(this.selectedWishFilterIndex)].callback
-    );
+    this.handleOnSelectedWishFilterIndexChange(this.selectedWishFilterIndex);
   }
 
-  handleOnSelectedWishFilterIndexChange(wishFilterIndex: string) {
-    this.onWishFilterChange.emit(
-      this.wishFilters[Number.parseInt(wishFilterIndex)].callback
-    );
+  handleOnSelectedWishFilterIndexChange(selectedWishFilterIndex: string) {
+    this.wishFilterCallback =
+      this.wishFilters[Number.parseInt(selectedWishFilterIndex)].callback;
+
+    this.wishFilterCallbackChange.emit(this.wishFilterCallback);
   }
 }

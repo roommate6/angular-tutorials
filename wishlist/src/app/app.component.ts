@@ -27,19 +27,13 @@ export class AppComponent {
     new Wish('Drink coffe.', WishState.Completed),
     new Wish('Find grass that cuts itself.', WishState.Uncompleted),
   ];
-  wishFilterCallback: WishFilterCallback | undefined;
+  wishFilterCallback!: WishFilterCallback;
 
   get wishesWithFilterApplied(): Wish[] {
-    if (this.wishFilterCallback === undefined) {
-      return this.wishes;
-    }
     return this.wishes.filter(this.wishFilterCallback);
   }
 
   handleOnNewWishCreateEvent(wish: Wish) {
     this.wishes.push(wish);
-  }
-  handleOnWishFilterChangeEvent(wishFilterCallback: WishFilterCallback) {
-    this.wishFilterCallback = wishFilterCallback;
   }
 }
