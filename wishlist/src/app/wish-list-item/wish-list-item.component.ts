@@ -15,6 +15,12 @@ export class WishListItemComponent {
   @Output() wishStateChange: EventEmitter<WishState> =
     new EventEmitter<WishState>();
 
+  get cssClasses(): object {
+    return {
+      'strikeout text-muted': this.verifyThatWishIsCompleted(),
+    };
+  }
+
   verifyThatWishIsCompleted(): boolean {
     return this.wishState === WishState.Completed;
   }
