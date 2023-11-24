@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Wish, WishState } from '../../shared/models/Wish';
-import events from '../../shared/services/EventService';
+import { EventService } from '../../shared/services/EventService';
 
 @Component({
   selector: 'wish-list-item',
@@ -13,6 +13,8 @@ import events from '../../shared/services/EventService';
 })
 export class WishListItemComponent {
   @Input() wish!: Wish;
+
+  constructor(private eventService: EventService) {}
 
   get cssClasses(): object {
     return {
@@ -33,6 +35,6 @@ export class WishListItemComponent {
   }
 
   handleDeleteWishButtonClickEvent() {
-    events.emit('deleteWishButtonClick', this.wish);
+    this.eventService.emit('deleteWishButtonClick', this.wish);
   }
 }

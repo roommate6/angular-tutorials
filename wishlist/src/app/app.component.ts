@@ -6,7 +6,7 @@ import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
 
 import { Wish, WishState, WishFilterCallback } from '../shared/models/Wish';
-import events from '../shared/services/EventService';
+import { EventService } from '../shared/services/EventService';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +32,8 @@ export class AppComponent {
     return true;
   };
 
-  constructor() {
-    events.addListener('deleteWishButtonClick', (wish: Wish) => {
+  constructor(eventService: EventService) {
+    eventService.addListener('deleteWishButtonClick', (wish: Wish) => {
       const indexOfTheWish: number = this.wishes.indexOf(wish);
       if (indexOfTheWish === -1) {
         return;
