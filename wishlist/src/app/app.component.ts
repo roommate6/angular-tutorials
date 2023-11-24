@@ -33,10 +33,12 @@ export class AppComponent {
   };
 
   constructor() {
-    events.addListener('deleteWishButtonClick', (wish: any) => {
-      // to do: remove wish from wishes
-
-      console.log(wish);
+    events.addListener('deleteWishButtonClick', (wish: Wish) => {
+      const indexOfTheWish: number = this.wishes.indexOf(wish);
+      if (indexOfTheWish === -1) {
+        return;
+      }
+      this.wishes.splice(indexOfTheWish, 1);
     });
   }
 
