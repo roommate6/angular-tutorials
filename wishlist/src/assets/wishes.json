@@ -1,0 +1,6 @@
+[
+  { "content": "I want to learn Angular!", "state": "Uncompleted" },
+  { "content": "I want to help my family.", "state": "Uncompleted" },
+  { "content": "Drink coffe.", "state": "Completed" },
+  { "content": "ind grass that cuts itself.", "state": "Uncompleted" }
+]

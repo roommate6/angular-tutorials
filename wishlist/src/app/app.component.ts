@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WishesDisplayerComponent } from './wishes-displayer/wishes-displayer.component';
@@ -7,6 +7,7 @@ import { WishFilterComponent } from './wish-filter/wish-filter.component';
 
 import { Wish, WishState, WishFilterCallback } from '../shared/models/Wish';
 import { EventService } from '../shared/services/EventService';
+import { WishService } from './wish.service';
 
 @Component({
   selector: 'app-root',
@@ -21,24 +22,34 @@ import { EventService } from '../shared/services/EventService';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  wishes: Wish[] = [
-    new Wish('I want to learn Angular.', WishState.Uncompleted),
-    new Wish('I want to help my family.', WishState.Uncompleted),
-    new Wish('Drink coffe.', WishState.Completed),
-    new Wish('Find grass that cuts itself.', WishState.Uncompleted),
-  ];
+export class AppComponent implements OnInit {
+  wishes: Wish[] = [];
   wishFilterCallback: WishFilterCallback = (_wish: Wish) => {
     return true;
   };
 
-  constructor(eventService: EventService) {
+  constructor(eventService: EventService, private wishService: WishService) {
     eventService.addListener('deleteWishButtonClick', (wish: Wish) => {
       const indexOfTheWish: number = this.wishes.indexOf(wish);
       if (indexOfTheWish === -1) {
         return;
       }
       this.wishes.splice(indexOfTheWish, 1);
+    });
+  }
+
+  ngOnInit(): void {
+    this.wishService.getWishes().subscribe((wishes: any) => {
+      wishes.forEach((wish: any) => {
+        this.wishes.push(
+          new Wish(
+            wish.content,
+            WishState[wish.state as keyof typeof WishState]
+          )
+        );
+      });
+
+      console.log(wishes);
     });
   }
 

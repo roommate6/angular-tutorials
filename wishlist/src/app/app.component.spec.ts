@@ -17,13 +17,15 @@ describe('AppComponent', () => {
   it(`should have the 'wishlist' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('wishlist');
+    //expect(app.title).toEqual('wishlist'); i have deleted the tile component
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, wishlist');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, wishlist'
+    );
   });
 });
