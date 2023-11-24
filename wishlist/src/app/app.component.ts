@@ -6,6 +6,7 @@ import { AddWishFormComponent } from './add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from './wish-filter/wish-filter.component';
 
 import { Wish, WishState, WishFilterCallback } from '../shared/models/Wish';
+import events from '../shared/services/EventService';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,14 @@ export class AppComponent {
   wishFilterCallback: WishFilterCallback = (_wish: Wish) => {
     return true;
   };
+
+  constructor() {
+    events.addListener('deleteWishButtonClick', (wish: any) => {
+      // to do: remove wish from wishes
+
+      console.log(wish);
+    });
+  }
 
   get wishesWithFilterApplied(): Wish[] {
     return this.wishes.filter(this.wishFilterCallback);

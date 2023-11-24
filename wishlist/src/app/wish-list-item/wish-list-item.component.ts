@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { WishState } from '../../shared/models/Wish';
+import events from '../../shared/services/EventService';
 
 @Component({
   selector: 'wish-list-item',
@@ -35,5 +37,7 @@ export class WishListItemComponent {
     this.wishStateChange.emit(this.wishState);
   }
 
-  handleDeleteButtonClickEvent() {}
+  handleDeleteWishButtonClickEvent() {
+    events.emit('deleteWishButtonClick', this.wishContent);
+  }
 }
