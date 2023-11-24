@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WishState } from '../../shared/models/Wish';
+import { Wish, WishState } from '../../shared/models/Wish';
 import events from '../../shared/services/EventService';
 
 @Component({
@@ -12,10 +12,7 @@ import events from '../../shared/services/EventService';
   styleUrl: './wish-list-item.component.css',
 })
 export class WishListItemComponent {
-  @Input() wishContent!: string;
-  @Input() wishState!: WishState;
-  @Output() wishStateChange: EventEmitter<WishState> =
-    new EventEmitter<WishState>();
+  @Input() wish!: Wish;
 
   get cssClasses(): object {
     return {
@@ -24,20 +21,18 @@ export class WishListItemComponent {
   }
 
   verifyThatWishIsCompleted(): boolean {
-    return this.wishState === WishState.Completed;
+    return this.wish.state === WishState.Completed;
   }
 
   toggleWishState(): void {
-    if (this.wishState === WishState.Uncompleted) {
-      this.wishState = WishState.Completed;
-    } else if (this.wishState === WishState.Completed) {
-      this.wishState = WishState.Uncompleted;
+    if (this.wish.state === WishState.Uncompleted) {
+      this.wish.state = WishState.Completed;
+      return;
     }
-
-    this.wishStateChange.emit(this.wishState);
+    this.wish.state = WishState.Uncompleted;
   }
 
   handleDeleteWishButtonClickEvent() {
-    events.emit('deleteWishButtonClick', this.wishContent);
+    events.emit('deleteWishButtonClick', this.wish);
   }
 }
