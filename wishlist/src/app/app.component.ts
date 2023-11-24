@@ -27,7 +27,9 @@ export class AppComponent {
     new Wish('Drink coffe.', WishState.Completed),
     new Wish('Find grass that cuts itself.', WishState.Uncompleted),
   ];
-  wishFilterCallback!: WishFilterCallback;
+  wishFilterCallback: WishFilterCallback = (_wish: Wish) => {
+    return true;
+  };
 
   get wishesWithFilterApplied(): Wish[] {
     return this.wishes.filter(this.wishFilterCallback);

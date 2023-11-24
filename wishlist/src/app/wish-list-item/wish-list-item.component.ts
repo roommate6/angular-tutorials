@@ -34,4 +34,6 @@ export class WishListItemComponent {
 
     this.wishStateChange.emit(this.wishState);
   }
+
+  handleDeleteButtonClickEvent() {}
 }

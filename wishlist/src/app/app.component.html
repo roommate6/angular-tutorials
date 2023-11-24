@@ -1,4 +1,4 @@
-<div class="main-contianer">
+<div class="main-container">
   <add-wish-form
     (onNewWishCreate)="handleOnNewWishCreateEvent($event)"
   ></add-wish-form>
@@ -7,7 +7,9 @@
     <wish-filter [(wishFilterCallback)]="wishFilterCallback"></wish-filter>
   </div>
 
-  <div class="column mt-3">
-    <wishes-displayer [wishes]="wishesWithFilterApplied"> </wishes-displayer>
+  <div class="row mt-3">
+    <div class="col-sm-4">
+      <wishes-displayer [wishes]="wishesWithFilterApplied"> </wishes-displayer>
+    </div>
   </div>
 </div>
