@@ -27,7 +27,7 @@ export class WishService {
     options.params = new HttpParams({ fromObject: { format: 'json' } });
 
     return this.http
-      .get('assets/wishes1.json', options)
+      .get('assets/wishes.json', options)
       .pipe(catchError(this.handleError));
   }
 
