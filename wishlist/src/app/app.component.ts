@@ -39,18 +39,21 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wishService.getWishes().subscribe((wishes: any) => {
-      wishes.forEach((wish: any) => {
-        this.wishes.push(
-          new Wish(
-            wish.content,
-            WishState[wish.state as keyof typeof WishState]
-          )
-        );
-      });
-
-      console.log(wishes);
-    });
+    this.wishService.getWishes().subscribe(
+      (wishes: any) => {
+        wishes.forEach((wish: any) => {
+          this.wishes.push(
+            new Wish(
+              wish.content,
+              WishState[wish.state as keyof typeof WishState]
+            )
+          );
+        });
+      },
+      (error: any) => {
+        alert(error.message);
+      }
+    );
   }
 
   get wishesWithFilterApplied(): Wish[] {

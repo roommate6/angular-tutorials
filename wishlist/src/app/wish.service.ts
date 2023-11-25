@@ -19,7 +19,7 @@ export class WishService {
 
     options.params = new HttpParams({ fromObject: { format: 'json' } });
 
-    return this.http.get('assets/wishes.json', options);
+    return this.http.get('assets/wishes1.json', options);
   }
 
   addWish(wish: Wish) {
