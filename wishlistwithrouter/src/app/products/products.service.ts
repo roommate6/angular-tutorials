@@ -16,4 +16,12 @@ export class ProductsService {
   getAllProducts() {
     return of(this.data);
   }
+
+  getById(id: number) {
+    return of(
+      this.data.find((element) => {
+        return element.id === id;
+      })
+    );
+  }
 }
