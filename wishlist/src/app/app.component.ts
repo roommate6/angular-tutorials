@@ -8,6 +8,7 @@ import { WishFilterComponent } from './wish-filter/wish-filter.component';
 import { Wish, WishState, WishFilterCallback } from '../shared/models/Wish';
 import { EventService } from '../shared/services/EventService';
 import { WishService } from './wish.service';
+import { ContactModule } from './contact/contact.module';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { WishService } from './wish.service';
     WishesDisplayerComponent,
     AddWishFormComponent,
     WishFilterComponent,
+    ContactModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
