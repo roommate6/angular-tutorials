@@ -20,6 +20,12 @@
     ></textarea>
   </div>
   <div class="mb-3">
-    <button type="submit" class="btn btn-primary">Send Message</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="contactForm.invalid"
+    >
+      Send Message
+    </button>
   </div>
 </form>
