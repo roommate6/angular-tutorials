@@ -1,17 +1,27 @@
 <form class="container p-5">
   <div class="mb-3">
     <label class="form-label">Your name</label>
-    <input type="text" class="form-control" />
+    <input type="text" class="form-control" [formControl]="nameControl" />
   </div>
   <div class="mb-3">
     <label class="form-label">Your email address</label>
-    <input type="email" class="form-control" />
+    <input type="email" class="form-control" [formControl]="emailControl" />
   </div>
   <div class="mb-3">
     <label class="form-label">Message</label>
-    <textarea class="form-control" rows="3"></textarea>
+    <textarea
+      class="form-control"
+      rows="3"
+      [formControl]="messageControl"
+    ></textarea>
   </div>
   <div class="mb-3">
-    <button type="submit" class="btn btn-primary">Send Message</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="$event.preventDefault(); submitForm()"
+    >
+      Send Message
+    </button>
   </div>
 </form>
